@@ -22,7 +22,6 @@ const handler = async (
         return;
       }
       // Update or create data in your database
-      console.log(req.body);
       const postRes = await prisma.post.create({
         data: {
           name: req.body.name || '名無しさん',

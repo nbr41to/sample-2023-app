@@ -22,11 +22,16 @@ const sendRequest = async (url: string, data: { arg: Post }) => {
 };
 
 export const usePosts = () => {
-  const { data, isLoading, error } = useSWR<Post[]>('/api/posts', fetcher);
+  const { data, isLoading, error, isValidating, mutate } = useSWR<Post[]>(
+    '/api/posts',
+    fetcher,
+  );
   const {
+    data: mutateData,
     trigger,
     isMutating,
     error: mutateError,
+    reset: resetMutate, // (data, error, isMutating)をreset
   } = useSWRMutation<Post>('/api/posts', sendRequest);
 
   console.log({
